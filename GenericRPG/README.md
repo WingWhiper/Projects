@@ -1,0 +1,1 @@
+Purely experimental workspace to play around with classes and making them do stuff in Java.

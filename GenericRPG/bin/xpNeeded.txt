@@ -1,0 +1,8 @@
+//This is supposed to be a reference file for how much Exp is needed to level
+5
+10
+20
+40
+80
+120
+180
