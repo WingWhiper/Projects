@@ -1,0 +1,4 @@
+11-4-21
+Maybe integrate pathlib, make the generated email text files go to a new folder.
+
+Need to refractor the code a bit more, lot of redundancy and better ways things could be done.
