@@ -1,4 +1,14 @@
 11-4-21
 Maybe integrate pathlib, make the generated email text files go to a new folder.
 
-Need to refractor the code a bit more, lot of redundancy and better ways things could be done.
+Need to refactor the code a bit more, lot of redundancy and better ways things could be done.
+
+PM Update
+More refactoring, removed redundant variable assignments.
+Troubleshooting the extra empty lines in the text file, the file is making 556 lines total.
+What is causing the loop to run 556 times?
+Generating 557 emails gave me 15,436 empty lines. There's some math here that can pinpoint the problem.
+1 email gave 29 total lines.
+2 emails gave 52 lines.
+3 gave 81 lines.
+
