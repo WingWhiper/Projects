@@ -13,15 +13,15 @@ def main():
     while 0 >= emails_to_generate <= 100000:
         print("Please Enter a number above zero and below a hundred thousand")
         try:
-            emails_to_generate = int(input("How many emails do you want to make?"))
+            emails_to_generate = int(input("How many emails do you want to make? "))
         except ValueError:
             print("You did not enter a numeric value")
             emails_to_generate = 0
 
-    # Adding items to the names lists.
+    # Adding variables for storing names from the store_names function.
     first_names = store_names(first_name_file)
     last_names = store_names(last_name_file)
-    # Makes 100 random email addresses
+    # Variable for storing new email  addresses generated with the generate_email function
     new_emails = generate_emails(first_names, last_names, email_hosts, emails_to_generate)
     # Store those emails in a file
     write_to_text_file(new_emails, new_email_list_file)
@@ -38,25 +38,23 @@ def store_names(file):
 
 
 def generate_emails(fn, ln, eh, te):
+    # First name, last name, email host, and total emails.
     import random
     # These values assign first names, last names, email hosts, and the total emails to generate.
-    fn = fn
-    ln = ln
-    eh = eh
-    te = te
+    # Why is there a for loop at the end of this assignment? What were you thinking?
     group = "".join(random.choice(fn) + random.choice(ln) + str(random.randint(100, 999)) + "@"
                     + random.choice(eh) + "\n" for _ in range(te))
     return group
 
 
 def write_to_text_file(ne, fn):
-    # Gives the new emails a variable to use to write the emails to a text file.
-    text_to_write = ne
+    # Take in new_emails and a file name
     # PyCharm suggested changing in to _ here. Need to understand why
-    for _ in text_to_write:
-        text_to_write = text_to_write + "\n"
+    for _ in ne:
+        ne = ne + "\n"
+    # Opens the file name given and write the emails on each line.
     outfile = open(fn, 'w')
-    outfile.writelines(text_to_write)
+    outfile.writelines(ne)
     outfile.close()
 
 
