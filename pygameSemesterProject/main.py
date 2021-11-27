@@ -2,7 +2,7 @@ import pygame
 
 
 def load_image(image_name):
-    image = pygame.image.load(f'{image_name}').convert()
+    image = pygame.image.load(f'{image_name}').convert_alpha()
     return image
 
 
@@ -18,7 +18,7 @@ def load_ships():
 class Ship(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = load_image('images/ship_h_four.png')
+        self.image = load_image('images/ship_h_five.png')
         self.rect = self.image.get_rect(midbottom=(400, 400))
 
     def move_ship(self):
@@ -36,6 +36,21 @@ class Ship(pygame.sprite.Sprite):
         self.move_ship()
 
 
+class Missile(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = load_image('images/Missile_1_Flying_000.png')
+        self.image = pygame.transform.rotate(self.image, 270)
+        self.image = pygame.transform.scale(self.image, (150, 45))
+        self.rect = self.image.get_rect(topleft=(0, 50))
+
+    def fire_missile(self):
+        self.rect.x += 1
+
+    def update(self):
+        self.fire_missile()
+
+
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption('Battleship Game')
@@ -50,12 +65,12 @@ game_name_rect = game_name.get_rect(center=(400, 25))
 # create a variable to hold the right side display text
 side_display_text = side_font.render('Remaining ships', False, (0, 0, 0))
 side_display_text_rect = side_display_text.get_rect(center=(750, 105))
+# Ship variables
 h_ship_two, h_ship_three, h_ship_four, h_ship_five = load_ships()
 ship = pygame.sprite.GroupSingle()
 ship.add(Ship())
-# Testing ways to get rectangles around squares, or atleast blit something to that square
-# black_box = pygame.draw.rect(screen, (0, 0, 0), (65, 50))
-# black_box_rect = black_box.get_rect(topleft=(4, 54))
+missiles = pygame.sprite.Group()
+missiles.add(Missile())
 
 while True:
     for event in pygame.event.get():
@@ -67,9 +82,9 @@ while True:
         screen.blit(background, (0, 0))
         screen.blit(game_name, game_name_rect)
         screen.blit(side_display_text, side_display_text_rect)
-        # screen.blit(black_box, black_box_rect)
         ship.draw(screen)
         ship.update()
-
+        missiles.draw(screen)
+        missiles.update()
     pygame.display.update()
     clock.tick(60)
