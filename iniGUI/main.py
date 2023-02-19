@@ -7,6 +7,13 @@ def select_file():
     filename = filedialog.askopenfilename(title="Select INI File", filetypes=[("INI files", "*.ini")])
     print("Selected file:", filename)
 
+    # Get the character name from the filename
+    prefix, character = filename.split("_", 1)
+    character = character[:-4]  # Remove the ".ini" file extension
+
+    # Update the window title with the character name
+    root.title(f"INI File Editor - {character}")
+
 
 # Setting up the main display window
 root = tk.Tk()
