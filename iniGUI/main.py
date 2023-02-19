@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
+import configparser
 
 
 # Functions
@@ -13,6 +14,13 @@ def select_file():
 
     # Update the window title with the character name
     root.title(f"INI File Editor - {character}")
+
+
+# Get the config file's sections
+def get_sections(filename):
+    config = configparser.ConfigParser()
+    config.read(filename)
+    return config.sections()
 
 
 # Setting up the main display window
